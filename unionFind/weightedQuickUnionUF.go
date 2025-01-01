@@ -1,13 +1,13 @@
 package unionfind
 
-type UnionFind struct {
+type WeightedQuickUnionUF struct {
 	id    []int
 	sz    []int
 	count int
 }
 
-func NewUnionFind(n int) *UnionFind {
-	uf := &UnionFind{
+func NewUnionFind(n int) UnionFind {
+	uf := &WeightedQuickUnionUF{
 		id:    make([]int, n),
 		sz:    make([]int, n),
 		count: n,
@@ -18,14 +18,14 @@ func NewUnionFind(n int) *UnionFind {
 	}
 	return uf
 }
-func (uf *UnionFind) Find(p int) int {
+func (uf *WeightedQuickUnionUF) Find(p int) int {
 	for p != uf.id[p] {
 		p = uf.id[p]
 	}
 	return p
 }
 
-func (uf *UnionFind) Union(p, q int) {
+func (uf *WeightedQuickUnionUF) Union(p, q int) {
 	i := uf.Find(p)
 	j := uf.Find(q)
 	if i == j {
@@ -41,10 +41,10 @@ func (uf *UnionFind) Union(p, q int) {
 	uf.count--
 }
 
-func (uf *UnionFind) Connected(p, q int) bool {
+func (uf *WeightedQuickUnionUF) Connected(p, q int) bool {
 	return uf.Find(p) == uf.Find(q)
 }
 
-func (uf *UnionFind) Count() int {
+func (uf *WeightedQuickUnionUF) Count() int {
 	return uf.count
 }
